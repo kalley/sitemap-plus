@@ -1,0 +1,20 @@
+{
+    "name": "kalley/sitemap-plus",
+    "description": "Sitemap generator for Laravel. Includes sitemap extensions",
+    "authors": [
+        {
+            "name": "kalley",
+            "email": "kalley.powell@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "illuminate/support": "4.2.*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Kalley\\SitemapPlus\\": "src/"
+        }
+    },
+    "minimum-stability": "stable"
+}
