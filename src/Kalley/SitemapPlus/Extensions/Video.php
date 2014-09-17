@@ -1,5 +1,6 @@
-<?php namespace Kalley\SitemapPlus;
+<?php namespace Kalley\SitemapPlus\Extensions;
 
+use Kalley\SitemapPlus\Extension;
 use Illuminate\Support\Collection;
 use Closure;
 
@@ -16,13 +17,19 @@ class Video extends Extension {
     $this->description = $description;
     $this->content_loc = $content_loc;
     $this->player_loc = $player_loc;
-    $this->tag = new Collection();
-    $this->price = new Collection();
+    $this->props['tag'] = new Collection();
+    $this->props['price'] = new Collection();
   }
 
-  public function addTag($tag) {
-    if ( $this->tag->count() < 32 ) {
-      $this->tag[] = $tag;
+  public function addTags($tags) {
+    if ( func_num_args() > 1 ) {
+      $tags = func_get_args();
+    }
+    if ( ! is_array($tags) ) {
+      $tags = [$tags];
+    }
+    if ( $this->tag->count() < 32 - count($tags) ) {
+      $this->tag->merge($tags);
       return $this;
     }
     throw new Exception('Only 32 tags are allowed');
@@ -33,10 +40,10 @@ class Video extends Extension {
       'text' => $price,
       'currency' => $currency,
     ];
+    $this->price[] = $price;
     if ( $inline !== null ) {
       $inline($price);
     }
-    $this->price[] = $price;
     return $this;
   }
 

@@ -1,4 +1,6 @@
-<?php namespace Kalley\SitemapPlus;
+<?php namespace Kalley\SitemapPlus\Extensions;
+
+use Kalley\SitemapPlus\Extension;
 
 class Image extends Extension {
 
@@ -9,7 +11,4 @@ class Image extends Extension {
     $this->loc = $loc;
   }
 
-  public function toXML() {
-
-  }
 }

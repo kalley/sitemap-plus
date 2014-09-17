@@ -21,6 +21,14 @@ abstract class Extension {
     return $this->props[$prop];
   }
 
+  public function __isset($prop) {
+    return isset($this->props[$prop]);
+  }
+
+  public function __unset($prop) {
+    unset($this->props[$prop]);
+  }
+
   public function toArray() {
     return $this->props;
   }

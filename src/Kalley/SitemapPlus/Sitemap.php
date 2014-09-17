@@ -32,14 +32,14 @@ class Sitemap {
   public function with($extension) {
     $extensions = func_get_args();
     foreach ( $extensions as $extension ) {
-      $this->addNamesapce($extension);
+      $this->addNamespace($extension);
     }
     return $this;
   }
 
   public function getNamespaces() {
     return implode(" ", array_map(function($val, $key) {
-      return ( strpos($key, ':') !== false ? '' : 'xmlns' ) . ( empty($key) ? '' : ':' . $key ) . '="' . $val . '"';
+      return 'xmlns' . ( empty($key) ? '' : ':' . $key ) . '="' . $val . '"';
     }, $this->ns, array_keys($this->ns)));
   }
 

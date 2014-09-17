@@ -7,8 +7,10 @@
 @endforeach
 @elseif ( $prop === 'price' )
 @foreach ( $val as $price )
-      <video:price{{ isset($price->currency) ? ' currency="' . $price->currency . '"' : '' }}{{ isset($price->type) ? ' type="' . $price->type . '"' : '' }}{{ isset($price->resolution) ? ' resolution="' . $price->resolution . '"' : '' }}>{{ $price->text }}</video:price>
+      <video:price{{ HTML::attributes(array_diff_key((array)$price, ['text' => ''])) }}>{{ $price->text }}</video:price>
 @endforeach
+@elseif ( is_array($val) )
+      <video:{{ $prop }}{{ HTML::attributes(array_diff_key($val, ['text' => ''])) }}>{{ $val['text'] }}</video:{{ $prop }}>
 @else
       <video:{{ $prop }}>{{ $val }}</video:{{ $prop }}>
 @endif
