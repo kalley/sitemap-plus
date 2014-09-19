@@ -11,7 +11,7 @@
 @endforeach
 @elseif ( is_array($val) )
       <video:{{ $prop }}{{ HTML::attributes(array_diff_key($val, ['text' => ''])) }}>{{ $val['text'] }}</video:{{ $prop }}>
-@else
+@elseif ( ! is_null($val) )
       <video:{{ $prop }}>{{ $val }}</video:{{ $prop }}>
 @endif
 @endforeach
