@@ -66,7 +66,7 @@ class Sitemap {
       default:
         $contentType = 'application/xml';
     }
-    return Response::view('sitemap-plus::' . $type, ['sitemap' => $this])->header('Content-type', $contentType);
+    return Response::view('sitemap-plus::' . $type, ['sitemap' => $this])->header('Content-type', $contentType)->send();
   }
 
 }
