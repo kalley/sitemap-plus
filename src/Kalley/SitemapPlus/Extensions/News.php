@@ -3,6 +3,8 @@
 use Kalley\SitemapPlus\Extension;
 use Illuminate\Support\Collection;
 use Closure;
+use Carbon\Carbon;
+use DateTime;
 
 class News extends Extension {
 
@@ -16,6 +18,13 @@ class News extends Extension {
       'language' => $publication_language,
     ];
     $this->title = $title;
+    if ( $publication_date !== null && ! ( $publication_date instanceof Carbon ) ) {
+      if ( $publication_date instanceof DateTime ) {
+        $publication_date = Carbon::instance($publication_date)->toW3CString();
+      } else {
+        $publication_date = Carbon::parse($publication_date)->toW3CString();
+      }
+    }
     $this->publication_date = $publication_date;
   }
 

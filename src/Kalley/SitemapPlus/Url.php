@@ -5,6 +5,8 @@ use Kalley\SitemapPlus\Extensions\Video;
 use Kalley\SitemapPlus\Extensions\Image;
 use Illuminate\Support\Collection;
 use Closure;
+use Carbon\Carbon;
+use DateTime;
 
 class Url {
 
@@ -19,6 +21,13 @@ class Url {
   public function __construct($sitemap, $loc, $lastmod = null, $changefreq = null, $priority = null) {
     $this->sitemap = $sitemap;
     $this->loc = $loc;
+    if ( $lastmod !== null && ! ( $lastmod instanceof Carbon ) ) {
+      if ( $lastmod instanceof DateTime ) {
+        $lastmod = Carbon::instance($lastmod)->toW3CString();
+      } else {
+        $lastmod = Carbon::parse($lastmod)->toW3CString();
+      }
+    }
     $this->lastmod = $lastmod;
     $this->changefreq = $changefreq;
     $this->priority = $priority;
