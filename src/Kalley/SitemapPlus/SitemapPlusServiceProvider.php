@@ -34,8 +34,8 @@ class SitemapPlusServiceProvider extends ServiceProvider {
   }
 
   public function registerCommands() {
-    $this->app->bindShared('command.sitemap-plus.submit', function() {
-      return new SubmitCommand();
+    $this->app->bindShared('command.sitemap-plus.submit', function($app) {
+      return new SubmitCommand($app);
     });
 
     $this->commands('command.sitemap-plus.submit');
